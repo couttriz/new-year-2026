@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100vw;
+    height: 100vh;
+    background-color: #020103; /* Nền trời đêm tối */
+    overflow: hidden; /* Cắt bỏ hoàn toàn thanh cuộn */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+canvas {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+    display: block; 
+}
+
+#starCanvas {
+    z-index: 0;
+}
+
+#fireworksCanvas {
+    z-index: 1;
+}
+
+/* --- Căn giữa thông điệp chúc mừng --- */
+.message-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 3;
+    pointer-events: none; 
+    width: 100vw;
+}
+
+h1 {
+    color: #ffd700;
+    font-size: clamp(2rem, 5vw, 5rem);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-shadow: 0 0 10px #ff3300, 0 0 20px #ff3300;
+}
+
+.year {
+    color: #ffffff;
+    font-size: clamp(4rem, 10vw, 10rem);
+    margin: -10px 0;
+    font-weight: 900;
+    letter-spacing: 10px;
+    background: linear-gradient(to bottom, #ffea00, #ff6600, #cc0000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 10px 30px rgba(255, 51, 0, 0.3);
+}
+
+.subtitle {
+    color: #ffaa00;
+    font-size: clamp(1.2rem, 3vw, 3rem);
+    margin: 10px 0 0 0;
+    font-weight: bold;
+    letter-spacing: 8px;
+    text-shadow: 0 0 10px #ff8800;
+}
+
+/* --- Hiệu ứng chữ xuất hiện --- */
+.reveal {
+    opacity: 0; 
+    animation: fadeInUp 1.2s ease-out forwards; 
+}
+
+/* Độ trễ xuất hiện để dòng chữ hiện lên lần lượt */
+.reveal-1 { animation-delay: 0.5s; }
+.reveal-2 { animation-delay: 1.2s; }
+.reveal-3 { animation-delay: 2.2s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+/* --- TÙY CHỈNH KHU VỰC DƯỚI CÙNG (SILHOUETTE) --- */
+.silhouette {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 12vh; 
+    background-color: #010102; 
+    z-index: 2; 
+    pointer-events: none;
+    border-top-left-radius: 50% 20%;
+    border-top-right-radius: 50% 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+.running-text-container {
+    width: 100vw;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    padding: 8px 0;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    background: rgba(218, 37, 29, 0.15); 
+}
+
+.running-text {
+    display: inline-block;
+    color: #ffd700; /* Chữ vàng rực */
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 170, 0, 0.8);
+    /* Kích hoạt hiệu ứng chạy 25 giây, lặp vô hạn */
+    animation: scrollText 25s linear infinite;
+}
+
+@keyframes scrollText {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Phần chữ ký ở dưới đáy */
+.footer-signature {
+    margin-top: 8px;
+}
+
+.footer-signature p {
+    color: #888888;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-style: italic;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        letter-spacing: 2px;
+    }
+    .year {
+        letter-spacing: 4px;
+    }
+    .subtitle {
+        letter-spacing: 3px;
+    }
+    .silhouette {
+        height: 15vh; 
+    }
+    .running-text-container {
+        padding: 5px 0;
+    }
+    .footer-signature {
+        margin-top: 5px;
+    }
+}
